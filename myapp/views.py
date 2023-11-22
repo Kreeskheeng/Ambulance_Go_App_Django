@@ -126,14 +126,19 @@ def booking_page(request):
 
 @login_required(login_url='login')
 def booking_history(request):
-    # Your logic for retrieving data (booking history)
-    # Ensure you fetch the required data to display in the booking_history.html template
-    bookings = Booking.objects.all()  # Example: Fetching booking data from a model
-    print(bookings)
-    return render(request, 'booking_history.html', {'bookings': bookings})
-        
+    print(f"User: {request.user}")
+    print(f"User ID: {request.user.id}")
+    print(f"Session User ID: {request.session.get('user_id')}")
 
-
+    if request.user.id == request.session.get('user_id'):
+        # Your logic for retrieving data (booking history)
+        # Ensure you fetch the required data to display in the booking_history.html template
+        bookings = Booking.objects.all()  # Example: Fetching booking data from a model
+        print(bookings)
+        return render(request, 'booking_history.html', {'bookings': bookings})
+    else:
+        # Return forbidden response for unauthorized access
+        return HttpResponseForbidden("Access Forbidden: Unauthorized user or session.")
 
 
 
