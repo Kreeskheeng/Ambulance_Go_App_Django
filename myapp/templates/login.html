@@ -32,6 +32,23 @@
             border: 1px solid #ccc;
             box-sizing: border-box;
         }
+        
+        .register-btn {
+            padding: 10px 20px;
+            background-color: #122853;
+            color: #fff;
+            border-radius: 3px;
+            cursor: pointer;
+            width: 25%;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            text-align: center;
+            text-decoration: none;
+            /* To remove default anchor underline */
+            display: block;
+            /* To force it to start on a new line */
+        }
     </style>
 </head>
 
@@ -64,8 +81,11 @@
         <form method="post">
             {% csrf_token %} {{ form.as_p }}
             <button type="submit">Login</button>
+            <a href="{% url 'register' %}" class="register-btn">Register</a>
         </form>
+
     </div>
+
 </body>
 <style>
     body {

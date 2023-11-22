@@ -43,7 +43,7 @@ def user_login(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('index.html')
+                return redirect('index')
         # If form is invalid, it will continue to the rendering part below
     
     return render(request, 'login.html', {'form': form})

@@ -28,6 +28,8 @@
                     <a href="{% url 'ambulance_registration' %}">Registration</a>
                 </li>
             </ul>
+            <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+
 
         </nav>
 
@@ -582,6 +584,31 @@
         margin: 10px 0px;
         letter-spacing: 0.2px;
         padding-left: 25px;
+    }
+    
+    .logout-btn {
+        height: 45px;
+        padding: 0px 20px;
+        border-radius: 4px;
+        background-color: #0e45a3;
+        /* Adjust color as needed */
+        color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 500;
+        letter-spacing: 1px;
+        font-size: 0.9rem;
+        margin-left: 10px;
+        /* Adjust spacing from emergency button */
+        text-decoration: none;
+        /* To remove default anchor underline */
+    }
+    
+    .logout-btn:hover {
+        background-color: #001c4f;
+        /* Adjust hover color as needed */
+        /* Add any additional hover effects */
     }
 </style>
 
