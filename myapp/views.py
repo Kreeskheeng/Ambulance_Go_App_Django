@@ -1,10 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login, logout
+
+
+
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from .models import Booking
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseForbidden
 from .models import Ambulance
 
 from django.contrib import messages
@@ -16,7 +19,7 @@ from .models import Ambulance
 
 
 
-
+@login_required(login_url='login')
 def index(request):
   #return HttpResponse('hi guys')
   return render(request, 'index.html')
@@ -25,10 +28,16 @@ def index(request):
 
 from django.shortcuts import render
 
+
+
 def maps(request):
     return render(request, 'maps.html')
 
+
+@login_required(login_url='login')
 def ambulance_registration(request):
+
+
     if request.method == 'POST':
         ambulance_number = request.POST.get('ambulance_number')
         telephone_number = request.POST.get('telephone_number')
@@ -45,8 +54,9 @@ def ambulance_registration(request):
 
     return render(request, 'ambulance_registration.html')
 
-
+@login_required(login_url='login')
 def booking_page(request):
+
     if request.method == 'POST':
         patient_name = request.POST.get('patient_name')
         tel_number = request.POST.get('tel_number')
@@ -78,15 +88,22 @@ def booking_page(request):
 
 
 
-
+@login_required(login_url='login')
 def booking_history(request):
     # Your logic for retrieving data (booking history)
     # Ensure you fetch the required data to display in the booking_history.html template
     bookings = Booking.objects.all()  # Example: Fetching booking data from a model
     print(bookings)
     return render(request, 'booking_history.html', {'bookings': bookings})
+        
 
+
+
+
+
+@login_required(login_url='login')
 def confirmation_page(request):
+
     # Fetch multiple bookings (for demonstration, you might adjust the logic)
     bookings = Booking.objects.all()  # Retrieve all bookings or apply filtering as needed
     booking_details_list = []

@@ -44,7 +44,7 @@ ROOT_URLCONF = 'AmbuGo.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [r"C:\Users\admin\Desktop\AmbuGo\myapp\templates"],
+        'DIRS': [BASE_DIR, 'myapp/templates',],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
