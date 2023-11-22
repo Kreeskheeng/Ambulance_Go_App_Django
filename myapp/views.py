@@ -14,12 +14,47 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from .models import Ambulance
 
+from django.shortcuts import render, redirect
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import logout
 
 
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')  # Redirect to login page after successful registration
+    else:
+        form = UserCreationForm()
+    return render(request, 'register.html', {'form': form})
 
 
+def user_login(request):
+    form = AuthenticationForm()  # Initialize the form outside the conditional blocks
+    
+    if request.method == 'POST':
+        form = AuthenticationForm(data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('index.html')
+        # If form is invalid, it will continue to the rendering part below
+    
+    return render(request, 'login.html', {'form': form})
 
-@login_required(login_url='login')
+
+def user_logout(request):
+    logout(request)
+    return redirect('login')  # Redirect to login page after logout
+
+
+#@login_required(login_url='login')
 def index(request):
   #return HttpResponse('hi guys')
   return render(request, 'index.html')

@@ -113,6 +113,19 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
 
+# settings.py
+
+# Add authentication backends
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',  # Default Django authentication
+    # Add additional authentication backends if needed
+]
+
+# Configure login and logout URLs
+LOGIN_URL = '/login/'
+LOGOUT_URL = '/logout/'
+
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
