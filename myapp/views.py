@@ -43,6 +43,7 @@ def user_login(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
+                request.session['user_id'] = user.id  # Set user ID in the session
                 return redirect('index')
         # If form is invalid, it will continue to the rendering part below
     
