@@ -56,15 +56,11 @@ def user_logout(request):
 
 
 #@login_required(login_url='login')
+# vunerable page not using sessions
 def index(request):
   #return HttpResponse('hi guys')
   return render(request, 'index.html')
   
-  
-
-from django.shortcuts import render
-
-
 
 def maps(request):
     return render(request, 'maps.html')
